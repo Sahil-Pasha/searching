@@ -44,6 +44,7 @@ function App() {
           <button onClick={handleSearch}>Search</button>
         </span>
       </div>
+
       <div>
         <ul style={{ listStyleType: 'none' }}>
           {data.map((item, index) => (

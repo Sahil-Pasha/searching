@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from 'react'
+import './App.css'
+const mockData = [
+  'farhan',
+  'Rehan',
+  'Adnan',
+  'jikran',
+  'Noman',
+  'Samoon',
+  'Pasha',
+  'Javed',
+  'Arman',
+  'Shakir',
+  'shakir',
+  'rehan',
+  'Noman',
+]
 function App() {
+  const [data, setData] = useState(mockData)
+  const [searchText, setSearchText] = useState('')
+
+  const handleSearch = () => {
+    if (searchText === '') {
+      setData(data)
+      return
+    }
+    const filteredData = data.filter((item) => {
+      if (item.toLowerCase().includes(searchText.toLowerCase())) {
+        return item
+      }
+    })
+    setData(filteredData)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <h1>This is searching app</h1>
+        <input
+          type="text"
+          placeholder="type any name"
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <span>
+          <button onClick={handleSearch}>Search</button>
+        </span>
+      </div>
+      <div>
+        <ul style={{ listStyleType: 'none' }}>
+          {data.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
